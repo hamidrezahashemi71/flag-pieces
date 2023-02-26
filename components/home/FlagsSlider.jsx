@@ -1,10 +1,12 @@
-import UserSliderNavigation from "./UserSliderNavigation"
+import FlagSliderNavigation from "./FlagsSliderNavigation"
 import { Grid, Typography } from "@mui/material"
 import { Container } from "@mui/system"
-import UserCard from "./UserCard"
+import FlagCard from "./FlagCard"
 import { useState } from "react" 
 
-const UserSlider = ({ users, pages, handleClick }) => {
+
+
+const FlagSlider = ({ finalFlags, pages, handleChooseFlag }) => {
   
   const [currentPage, setCurrentPage] = useState(Number(pages[0]))
 
@@ -17,7 +19,7 @@ const UserSlider = ({ users, pages, handleClick }) => {
       mt: '40px',
     }}>
 
-      <UserSliderNavigation
+      <FlagSliderNavigation
         goBackward={() => setCurrentPage(currentPage - 1)}
         currentPage={currentPage}
         lastPage={pages.length}
@@ -28,11 +30,11 @@ const UserSlider = ({ users, pages, handleClick }) => {
         height: "770px",
       }}>
         {
-          users && users[currentPage] ?
-          users[currentPage].map((user, item, ref) => {
+          finalFlags && finalFlags[currentPage] ?
+          finalFlags[currentPage].map((flag, item, ref) => {
             return(
-              <Grid key={user.name} item xs={1} sx={ref.length < 6 ? {height: '50%'} : {}}>
-                <UserCard user={user} handleClick={handleClick} />
+              <Grid key={flag.name} item xs={1} sx={ ref.length < 6 ? {height: '50%'} : {} }>
+                <FlagCard flag={flag} handleChooseFlag={handleChooseFlag} />
               </Grid>
             )
           })
@@ -45,12 +47,12 @@ const UserSlider = ({ users, pages, handleClick }) => {
             }}
             >
               <Typography variant="h5">
-                No data found.
+                No data was found. Check your internet connection.
               </Typography>
             </Container>
         }
       </Grid>
-      <UserSliderNavigation
+      <FlagSliderNavigation
           goForward={() => setCurrentPage(currentPage + 1)}
           currentPage={currentPage}
           lastPage={pages.length}
@@ -58,7 +60,8 @@ const UserSlider = ({ users, pages, handleClick }) => {
       />
       
     </Container>
-)
+  )
+  
 }
 
-export default UserSlider
+export default FlagSlider

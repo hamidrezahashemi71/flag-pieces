@@ -1,7 +1,9 @@
 import Image from "next/image"
 import Puzzle from "./Puzzle"
 
-const ImageHolder = ({ useFor, src, gridSize, piecesNumber, puzzleMode, naturalWidth, naturalHeight, step, parentData, setParentData }) => {
+
+
+const ImageHolder = ({ useFor, src, gridSize, piecesNumber, puzzleMode, naturalWidth, naturalHeight, step, gameData, gameDataHandler }) => {
 
   const currentImageSize = { width: 324, height: 456 }
   const imageHeight = currentImageSize.width * naturalHeight / naturalWidth
@@ -9,11 +11,11 @@ const ImageHolder = ({ useFor, src, gridSize, piecesNumber, puzzleMode, naturalW
   if (useFor === 'puzzle') return (
     <Puzzle
       outterLength={currentImageSize.width}
-      setParentData={setParentData}
+      gameDataHandler={gameDataHandler}
       piecesNumber={piecesNumber}
       puzzleHeight={imageHeight}
       puzzleMode={puzzleMode}
-      parentData={parentData}
+      gameData={gameData}
       gridSize={gridSize}
       step={step}
       src={src}
@@ -28,6 +30,7 @@ const ImageHolder = ({ useFor, src, gridSize, piecesNumber, puzzleMode, naturalW
       src={src}
     />
   )
+
 }
 
 export default ImageHolder

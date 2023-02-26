@@ -1,1 +1,1 @@
-export const getUsers = async () => await (await fetch('https://restcountries.com/v3.1/all')).json()
+export const getFlags = async () => await (await fetch('https://restcountries.com/v3.1/all')).json()

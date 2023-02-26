@@ -9,7 +9,9 @@ const LandingInfo = ({thisGame}) => {
       <Typography variant="mainText">
         Try your chance
       </Typography>
-      <Typography variant="h1" sx={{ mb: '54px' }} >{thisGame.name}</Typography>
+      <Typography variant="h1" sx={{ mb: '54px' }} >
+        {thisGame.name}
+      </Typography>
       <Typography variant="mainText"  >
         The Number of Playing this Game
       </Typography>

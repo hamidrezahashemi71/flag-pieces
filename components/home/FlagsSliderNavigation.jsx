@@ -1,33 +1,32 @@
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material"
 import { Box } from "@mui/system"
 
-const UserSliderNavigation = ({ useFor, currentPage, lastPage, goForward, goBackward }) => {
+const FlagSliderNavigation = ({ useFor, currentPage, lastPage, goForward, goBackward }) => {
   return (
     <Box
-      className=''
       style={{
         display:
           (currentPage != 1 && useFor === 'backward') || (currentPage != lastPage && useFor === 'forward')
             ? 'flex' : 'none',
-        background: "#ffffff24",
-        width: "100px",
-        flexDirection: "column",
+        border: "2px solid #ffffff0f",
         justifyContent: "center",
+        background: "#ffffff24",
+        flexDirection: "column",
         alignItems: "center",
         borderRadius: "12px",
-        border: "2px solid #ffffff0f",
         color: "#ffffff8a",
         cursor: "pointer",
+        width: "100px",
       }}
       onClick={() => useFor === 'forward' ? goForward() : goBackward()}>
       {
         useFor === 'forward' ?
-          <ArrowForwardIos className="" />
+          <ArrowForwardIos sx={{ fontSize:"60px" }} />
             :
-          <ArrowBackIos className="sliderNavigationIcon" />
+          <ArrowBackIos sx={{ fontSize:"60px" }}/>
       }
     </Box>
 )
 }
 
-export default UserSliderNavigation
+export default FlagSliderNavigation

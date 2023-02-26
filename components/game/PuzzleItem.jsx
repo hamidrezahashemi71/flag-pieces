@@ -1,5 +1,7 @@
 import { Container, Grid } from "@mui/material"
 
+
+
 const PuzzleItem = ({ thisImage, thisIndex, gridSize, piecesNumber, piece, handleSelect, step }) => {
 
   return (
@@ -11,6 +13,7 @@ const PuzzleItem = ({ thisImage, thisIndex, gridSize, piecesNumber, piece, handl
       backgroundRepeat:'no-repeat',
       border: '1px solid white', 
     }}>
+
       <Container disableGutters maxWidth={false} style={{
         background: !piece.isSelected ? 'transparent' : piece.usable ? 'green' : 'red',
         cursor: step == 1 || (step === 2 && piece.usable) ? 'pointer' : 'default',
@@ -22,8 +25,10 @@ const PuzzleItem = ({ thisImage, thisIndex, gridSize, piecesNumber, piece, handl
           if((step == 2 && piece.usable) || step == 1) handleSelect(piece, thisIndex)
         }}
       />
+      
     </Grid>
   )
+  
 }
 
 export default PuzzleItem

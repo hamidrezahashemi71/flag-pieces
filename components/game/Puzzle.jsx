@@ -1,9 +1,10 @@
+import { toast } from "react-toastify"
 import PuzzleItem from "./PuzzleItem"
 import Loading from "../main/Loading"
 import { Grid } from "@mui/material"
 import { useEffect } from "react"
 
-const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterLength, step, parentData, setParentData }) => {
+const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterLength, step, gameData, gameDataHandler }) => {
   
   useEffect(() => {
     if(puzzleMode !== 'usable') createPuzzle()
@@ -13,8 +14,8 @@ const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterL
     if(puzzleMode !== 'usable') createPuzzle()
   }, [piecesNumber])
 
+  // populating pieces array for gameData
   const createPuzzle = () => {
-
     const clone = []
     for (let i = 0; i < piecesNumber; i++) {
       clone.push({
@@ -22,38 +23,37 @@ const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterL
         isSelected: false,
       })
     }
-    setParentData({ ...parentData, pieces: clone })
-    
+    gameDataHandler({ ...gameData, pieces: clone })
   }
 
-
+  // selecting and deselecting unusable pieces functionlity
   const handlePieceSelection = (item, index) => {
-
-    const clone = [...parentData.pieces]
+    const clone = [...gameData.pieces]
     if (step === 1) {
       const unusableLength = clone.filter(item => !item.usable).length
-      if(unusableLength +1 == piecesNumber && !item.isSelected) return
+      if (unusableLength + 1 == piecesNumber && !item.isSelected)
+        return toast.error("You can't choose all pieces!")
       clone[index]['isSelected'] = !clone[index]['isSelected']
       clone[index]['usable'] = !clone[index]['usable']
-      return setParentData({...parentData, pieces: clone})
+      return gameDataHandler({...gameData, pieces: clone})
     }
     clone[index]['isSelected'] = !clone[index]['isSelected']
-    setParentData({ ...parentData, pieces: clone })
-    
+    gameDataHandler({ ...gameData, pieces: clone })
   }
 
-  if (!parentData.pieces) return <Loading />
+  if (!gameData.pieces) return <Loading />
   return (
     <Grid container columns={piecesNumber} sx={{
       gridTemplateRows: puzzleHeight / gridSize,
       width: outterLength, height: puzzleHeight
       }}
     >
+
     {
-      parentData.pieces.map((piece, i) => {
+      gameData.pieces.map((piece, i) => {
         return (
           <PuzzleItem
-            handleSelect={(item, index) => handlePieceSelection(item, index)}
+            handlePieceSelection={(item, index) => handlePieceSelection(item, index)}
             outterLength={outterLength}
             piecesNumber={piecesNumber}
             key={outterLength + i}
@@ -68,7 +68,8 @@ const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterL
       }
       
     </Grid>
-)
+  )
+  
 }
 
 export default Puzzle

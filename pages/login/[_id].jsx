@@ -1,46 +1,47 @@
-import { Container } from "@mui/system"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import { findItem, setToken, useDatabase, useToken } from "../../lib"
+import Loading from "../../components/main/Loading"
 import Typography from '@mui/material/Typography'
 import { Button, TextField } from "@mui/material"
-import Loading from "../../components/main/Loading"
+import { findItem, useTitle } from "../../lib"
+import { useEffect, useState } from "react"
+import { Container } from "@mui/system"
+import { useRouter } from "next/router"
 import { toast } from 'react-toastify'
+
+
 
 const Login = () => {
 
   const router = useRouter()
-
-  const [data, setData] = useState({
+  const [loginData, setLoginData] = useState({
     _id: null,
     password: '',
-    error: null,
     loading: true
   })
-
   const thisItem = findItem()
   const gameId = router.query._id
 
+  // setting loginData from created object in database
   useEffect(() => {
     if (gameId) {
       if (!thisItem || !thisItem['games'][gameId]) router.push('/404')
-      else setData({ ...data, thisItem, _id: gameId, loading:false })
+      else setLoginData({ ...loginData, thisItem, _id: gameId, loading:false })
     }
   }, [router.query._id])
 
+  // login functionality for comparing passwords
   const loginHandler = () => {
-    if (!data.password || data.password !== data.thisItem.games[gameId].password)
+    if (!loginData.password || loginData.password !== loginData.thisItem.games[gameId].password)
       return toast.error("Incorrect Password")
     else {
       toast.success("Let's Play!")
       router.push({
         pathname: '/games/[_id]',
-        query: {_id: data._id}
+        query: {_id: loginData._id}
       })
       }
   }
 
-  if(data.loading) return <Loading />
+  if(loginData.loading) return <Loading />
     return (
       <Container maxWidth={false} sx={{
         minHeight: "120vh",
@@ -51,11 +52,18 @@ const Login = () => {
         justifyContent: 'start',
         alignItems: 'center',
       }}>
-        <Typography variant="h4" component='h4'>Game Password</Typography>
+
+        <Head>
+          <title>{ useTitle('Login') }</title>
+          <meta name="description" content="Login page" />
+        </Head>
+        <Typography variant="h4" component='h4'>
+          Game Password
+        </Typography>
         <TextField
+          onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
           placeholder="password"
           type={'password'}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
         />
         <Button
           variant="secondaryButton"
@@ -63,8 +71,10 @@ const Login = () => {
         >
           Save
         </Button>
+
       </Container>
     )
+  
   }
 
 

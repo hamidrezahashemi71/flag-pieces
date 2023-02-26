@@ -1,8 +1,11 @@
 import { TextField } from "@mui/material"
 import { Container } from "@mui/system"
 
+
+
 const SearchBox = ({ allFlags, setFilteredFlags }) => {
 
+  // search input functionality
   const find = (text) => setFilteredFlags(allFlags.filter((value) => value.name.toLowerCase().includes(text)), !!text)
 
   return (
@@ -15,7 +18,7 @@ const SearchBox = ({ allFlags, setFilteredFlags }) => {
       
     </Container>
   )
-  
+
 }
 
 export default SearchBox

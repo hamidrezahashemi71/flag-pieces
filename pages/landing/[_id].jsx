@@ -1,16 +1,18 @@
+import GameContainer from "../../components/game/GameContainer"
+import { findItem, useTitle, useToken } from "../../lib"
+import Loading from "../../components/main/Loading"
+import { useEffect, useState } from "react"
 import { Container } from "@mui/system"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import GameContainer from "../../components/game/GameContainer"
-import Loading from "../../components/main/Loading"
-import { findItem, useToken } from "../../lib"
+
+
 
 const Landing = () => {
 
   const [gameData, setGameData] = useState(null)
-
   const router = useRouter()
 
+  // set gameData from selected flag in home page
   useEffect(() => {
     if(!useToken()) router.push('/')
     if (router.query._id) {
@@ -26,8 +28,26 @@ const Landing = () => {
 
   if(!gameData) return <Loading />
   return (
-    <Container maxWidth='lg' sx={{display:'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>
-      <GameContainer useFor='landing' thisGame={gameData} src={gameData.image.src} naturalHeight={gameData.image.naturalHeight} naturalWidth={gameData.image.naturalWidth} />
+    <Container maxWidth='lg' sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh'
+    }}>
+      
+      <Head>
+        <title>{ useTitle('Landing') }</title>
+        <meta name="description" content="Landing page" />
+      </Head>
+      <GameContainer
+        naturalHeight={gameData.image.naturalHeight}
+        naturalWidth={gameData.image.naturalWidth}
+        src={gameData.image.src}
+        thisGame={gameData}
+        useFor='landing'
+      />
+
     </Container>
 )
 }
