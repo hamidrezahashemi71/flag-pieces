@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { Container } from "@mui/system"
 import { useRouter } from "next/router"
 import { toast } from 'react-toastify'
+import Head from 'next/head'
 
 
 

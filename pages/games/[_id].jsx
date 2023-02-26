@@ -5,6 +5,7 @@ import { Button, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { Container } from "@mui/system"
 import { useRouter } from "next/router"
+import Head from 'next/head'
 
 
 

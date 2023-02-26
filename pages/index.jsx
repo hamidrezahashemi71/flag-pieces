@@ -7,6 +7,7 @@ import { queryClient } from "./_app";
 import { getFlags } from '../apis'
 import { useTitle } from '@/lib'
 import { useState } from 'react'
+import Head from 'next/head'
 
 
 
@@ -30,7 +31,6 @@ export default function Home() {
     queryFn: getFlags,
     refetchOnWindowFocus: false,
     onSettled: (data) => {
-      console.log(data)
       const customizedUsers = data.reduce((acc, cur) => ([...acc, {
         flagName: cur['name']['common'] ?? 'Unknown',
         flagImage: cur['coatOfArms']['svg'] ?? process.env.DEFAULT_FLAG,
@@ -65,7 +65,7 @@ export default function Home() {
     }
     setData({ ...data, filteredData: {...clone}, isTextEntered:true })
   }
-
+console.log(Object.values(data.customized).reduce((acc, cur) => acc.concat(cur), []))
   if (!data) return <Loading />
   return (
     <Container maxWidth='xl'>
