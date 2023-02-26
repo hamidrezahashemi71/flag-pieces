@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.class1 {
+width: 400px;
+height:400px;
+margin-bottom: 40px;
+}
+
+.classImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border: 2px solid black;
+
+}
+
+.class2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* width: 300px; */
+  gap: 4px;
+}
+
+.gradientBg {
+  background: linear-gradient(269.52deg, #E89951 1.95%, #FF8C68 1.96%, #8449E4 83.59%);
+}
+
+.mainLayout {
+min-height: 1800px;
+}
+
+.sliderNavigationBar:hover{
+  background: linear-gradient(269.52deg, #E89951 1.95%, #FF8C68 1.96%, #8449E4 83.59%);
+  border: none;
+  color:black
+}
+
+.sliderNavigationIcon {
+  font-size: 60px;
+}
+
+.glassyBg {
+  background: #ffffff24;
+  border: 2px solid #ffffff0f;
+}
+
+
+.userCardBox {
+  height: 100%;
+  padding:10px;
+  border-radius: 12px;
+  background: #ffffff24;
+  border: 2px solid #ffffff0f;
+} 
+
+.userCardImageBox {
+  position:relative;
+  width:160px;
+  height: 160px;
+}
+
+.userCardFooter {
+  position: absolute;
+  bottom: 35px;
+  width:157px
+}
+
+.userCardName {
+  text-align: center;
+  margin-bottom:15px 
+}
+
+.navContainer {
+  background: #000000;
+  height:68px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between ;
+  align-items: center;
+  padding: 0 48px;
+  opacity: 90%;
+}
+
+.footerContainer {
+  background: #111111;
+  width: 100%;
+  /* height: 348px; */
+  margin: 0px;
+  padding-bottom: 16px
+}
+
+.copyright {
+  background: linear-gradient(269.52deg, #E89951 1.95%, #FF8C68 1.96%, #8449E4 83.59%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blackEllipse {
+  position:absolute;
+  left: 0;
+  bottom: -60%;
+  width: 492px;
+  height: 492px;
+  background: black;
+  border-radius: 50%;
+}
