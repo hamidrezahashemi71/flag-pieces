@@ -18,11 +18,11 @@ const GameSection = ({ allFlags, setFilteredFlags, flags, filteredFlags, isTextE
       />
     {chosenFlag &&
       <GameContainer
-        src={chosenFlag.image ? chosenFlag.image : process.env.DEFAULT_FLAG}
+        src={chosenFlag.flagImage ? chosenFlag.flagImage : process.env.DEFAULT_FLAG}
         naturalHeight={chosenFlag.naturalHeight}
         naturalWidth={chosenFlag.naturalWidth}
-        name={chosenFlag.name}
-        useFor={'puzzle'}
+        flagName={chosenFlag.flagName}
+        useFor={'game'}
         step={1}
       />
     }

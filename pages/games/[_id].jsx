@@ -36,7 +36,7 @@ const Game = () => {
         name: findItem()['games'][router.query._id]['name']
       })
     }
-  }, [router.query._id])
+  }, [])
 
   // save game and add counter functionality
   const handleSubmitGame = () => {
@@ -53,7 +53,7 @@ const Game = () => {
     })
   }
 
-  if(!thisGame) return <Loading />
+  if (!thisGame) return <Loading />
   return (
     <Container maxWidth='lg' sx={{
       display: 'flex',
@@ -78,9 +78,9 @@ const Game = () => {
         naturalWidth={thisGame.image.naturalWidth}
         piecesNumber={thisGame.pieces.length}
         src={thisGame.image.src}
-        parentData={thisGame}
-        puzzleMode='usable'
-        useFor='puzzle'
+        gameData={thisGame}
+        flagMode='usable'
+        useFor='game'
         step={2}
       />
       <Button

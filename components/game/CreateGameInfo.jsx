@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 
 
 
-const CreateGameInfo = ({ name, selectedButton, piecesNumberHandler, gameData, gameDataHandler }) => {
-  console.log(name)
+const CreateGameInfo = ({ flagName, selectedButton, piecesNumberHandler, gameData, gameDataHandler }) => {
+
   const [buttons, setButtons] = useState([
     { ...selectedButton },
     {
@@ -25,7 +25,6 @@ const CreateGameInfo = ({ name, selectedButton, piecesNumberHandler, gameData, g
       if (index === i) {
         clone[index]['isSelected'] = true
         piecesNumberHandler(clone[index])
-        console.log(clone[index])
       }
       else clone[i]['isSelected'] = false
     })
@@ -36,10 +35,10 @@ const CreateGameInfo = ({ name, selectedButton, piecesNumberHandler, gameData, g
     <> 
       
       <Typography variant="h1" sx={{ mb: '30px' }}>
-        {name.length && name.length > 13 ? name.slice(0, 12) + '...' : name}
+        {flagName.length && flagName.length > 13 ? flagName.slice(0, 12) + '...' : flagName}
       </Typography>
       <Typography variant="h6" sx={{ mb: '15px' }} >
-        Please choose puzzle pieces number:
+        Please choose flag pieces number:
       </Typography>  
       <Grid container columns={3} sx={{
         width: '250px',

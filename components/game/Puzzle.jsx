@@ -4,17 +4,17 @@ import Loading from "../main/Loading"
 import { Grid } from "@mui/material"
 import { useEffect } from "react"
 
-const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterLength, step, gameData, gameDataHandler }) => {
-  
+const Puzzle = ({ outterLength, gameDataHandler, piecesNumber, puzzleHeight, flagMode, gameData, gridSize, step, src }) => {
+
   useEffect(() => {
-    if(puzzleMode !== 'usable') createPuzzle()
+    if(flagMode !== 'usable') createPuzzle()
   }, [])
 
   useEffect(() => {
-    if(puzzleMode !== 'usable') createPuzzle()
+    if(flagMode !== 'usable') createPuzzle()
   }, [piecesNumber])
 
-  // populating pieces array for gameData
+  // populating pieces array for gameData for the first time
   const createPuzzle = () => {
     const clone = []
     for (let i = 0; i < piecesNumber; i++) {
@@ -26,7 +26,7 @@ const Puzzle = ({ puzzleHeight, gridSize, puzzleMode, piecesNumber, src, outterL
     gameDataHandler({ ...gameData, pieces: clone })
   }
 
-  // selecting and deselecting unusable pieces functionlity
+  // selecting and deselecting unusable pieces functionlity and change pieces array in gameData
   const handlePieceSelection = (item, index) => {
     const clone = [...gameData.pieces]
     if (step === 1) {

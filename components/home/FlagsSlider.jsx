@@ -7,7 +7,6 @@ import { useState } from "react"
 
 
 const FlagSlider = ({ finalFlags, pages, handleChooseFlag }) => {
-  
   const [currentPage, setCurrentPage] = useState(Number(pages[0]))
 
   return ( 
@@ -32,7 +31,7 @@ const FlagSlider = ({ finalFlags, pages, handleChooseFlag }) => {
         {
           finalFlags && finalFlags[currentPage] ?
           finalFlags[currentPage].map((flag, item, ref) => {
-            return(
+            return (
               <Grid key={flag.name} item xs={1} sx={ ref.length < 6 ? {height: '50%'} : {} }>
                 <FlagCard flag={flag} handleChooseFlag={handleChooseFlag} />
               </Grid>

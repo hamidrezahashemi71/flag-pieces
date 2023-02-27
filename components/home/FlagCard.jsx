@@ -6,7 +6,7 @@ import Image from "next/image"
 
 
 const FlagCard = ({ flag, handleChooseFlag }) => {
-  
+
   const [imageError, setImageError] = useState(false);
   const imageRef = useRef(null)
 
@@ -34,7 +34,7 @@ const FlagCard = ({ flag, handleChooseFlag }) => {
         }}>
           
             <Image
-              src={imageError ? process.env.DEFAULT_FLAG : flag.image}
+              src={imageError ? process.env.DEFAULT_FLAG : flag.flagImage}
               style={{ objectFit: 'contain', top: '-80px' }}
               onError={() => setImageError(true)}
               alt='flag picture'
@@ -53,7 +53,7 @@ const FlagCard = ({ flag, handleChooseFlag }) => {
               textAlign: "center",
               mt: "15px", 
           }}>
-            {flag.name}
+            {flag.flagName}
           </Typography>
           <Button
             variant='cardButton'

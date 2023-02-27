@@ -65,7 +65,7 @@ export default function Home() {
     }
     setData({ ...data, filteredData: {...clone}, isTextEntered:true })
   }
-console.log(Object.values(data.customized).reduce((acc, cur) => acc.concat(cur), []))
+
   if (!data) return <Loading />
   return (
     <Container maxWidth='xl'>

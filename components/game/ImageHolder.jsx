@@ -3,18 +3,18 @@ import Puzzle from "./Puzzle"
 
 
 
-const ImageHolder = ({ useFor, src, gridSize, piecesNumber, puzzleMode, naturalWidth, naturalHeight, step, gameData, gameDataHandler }) => {
+const ImageHolder = ({ gameDataHandler, piecesNumber, gridSize, naturalHeight, naturalWidth, flagMode, gameData, useFor, src, step }) => {
 
   const currentImageSize = { width: 324, height: 456 }
   const imageHeight = currentImageSize.width * naturalHeight / naturalWidth
 
-  if (useFor === 'puzzle') return (
+  if (useFor === 'game') return (
     <Puzzle
       outterLength={currentImageSize.width}
       gameDataHandler={gameDataHandler}
       piecesNumber={piecesNumber}
       puzzleHeight={imageHeight}
-      puzzleMode={puzzleMode}
+      flagMode={flagMode}
       gameData={gameData}
       gridSize={gridSize}
       step={step}

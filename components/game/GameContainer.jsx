@@ -10,7 +10,7 @@ import Image from "next/image"
 
 
 
-const GameContainer = ({ useFor, src, name, naturalWidth, naturalHeight, thisGame }) => {
+const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thisGame }) => {
   
   const [pieceNumbers, setPieceNumbers] = useState({
     isSelected: true,
@@ -133,7 +133,7 @@ const GameContainer = ({ useFor, src, name, naturalWidth, naturalHeight, thisGam
               gridSize={pieceNumbers.gridSize} 
               naturalHeight={naturalHeight}
               naturalWidth={naturalWidth}
-              puzzleMode='unusable'
+              flagMode='unusable'
               gameData={gameData}
               useFor={useFor}
               src={src}
@@ -143,19 +143,19 @@ const GameContainer = ({ useFor, src, name, naturalWidth, naturalHeight, thisGam
           </Grid>
 
           <Grid item zIndex={20} xs={4} sx={{
-            top: useFor === 'puzzle' ? '25px' : '126px',
+            top: useFor === 'game' ? '25px' : '126px',
             position: 'absolute', 
             left: '564px',
           }}>
 
             <Box>
-                {useFor === 'puzzle' ?
+                {useFor === 'game' ?
               <CreateGameInfo
                 piecesNumberHandler={(data) => setPieceNumbers(data)}
                 gameDataHandler={(data) => setGameData(data)}
                 selectedButton={pieceNumbers}
                 gameData={gameData}
-                name={name}
+                flagName={flagName}
               />
               :
               <LandingInfo thisGame={thisGame} />
@@ -165,11 +165,11 @@ const GameContainer = ({ useFor, src, name, naturalWidth, naturalHeight, thisGam
           </Grid>
           
           <Grid item xs={2} sx={{
-            bottom: useFor === 'puzzle' ? '34px' : '47px',
+            bottom: useFor === 'game' ? '34px' : '47px',
             position: 'absolute', 
             right:'47px',
           }}>
-              {useFor === 'puzzle' ?
+              {useFor === 'game' ?
             <Button
               variant="primaryButton"
               onClick={handleCreateGame}
