@@ -14,7 +14,7 @@ const CreateGameInfo = ({ flagName, selectedButton, piecesNumberHandler, gameDat
     },
     {
       piecesNumber: 16,
-      isSelected: false,
+      isSelected: false, 
       gridSize: 4
     }])
 

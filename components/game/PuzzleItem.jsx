@@ -2,12 +2,12 @@ import { Container, Grid } from "@mui/material"
 
 
 
-const PuzzleItem = ({ handlePieceSelection, outterLength, piecesNumber, key, gridSize, thisImage, thisIndex, piece, step }) => {
-
+const PuzzleItem = ({ handlePieceSelection, piecesNumber, gridSize, thisImage, pieceIndex, piece, step }) => {
+console.log(step)
   return (
     <Grid item xs={piecesNumber / gridSize} sx={{
-      backgroundPositionX: ((100 / (gridSize - 1) * (thisIndex % gridSize))) + '%',
-      backgroundPositionY: ((100 / (gridSize - 1) * Math.floor(thisIndex / gridSize))) + '%',
+      backgroundPositionX: ((100 / (gridSize - 1) * (pieceIndex % gridSize))) + '%',
+      backgroundPositionY: ((100 / (gridSize - 1) * Math.floor(pieceIndex / gridSize))) + '%',
       backgroundSize: gridSize * 100 + '%',
       backgroundImage: `url(${thisImage})` ,
       backgroundRepeat:'no-repeat',
@@ -22,7 +22,7 @@ const PuzzleItem = ({ handlePieceSelection, outterLength, piecesNumber, key, gri
         width:'100%',
         }}
         onClick={() => {
-          if((step == 2 && piece.usable) || step == 1) handlePieceSelection(piece, thisIndex)
+          if((step == 2 && piece.usable) || step == 1) handlePieceSelection(piece, pieceIndex)
         }}
       />
       

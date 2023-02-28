@@ -45,7 +45,8 @@ const Puzzle = ({ outterLength, gameDataHandler, piecesNumber, puzzleHeight, fla
   return (
     <Grid container columns={piecesNumber} sx={{
       gridTemplateRows: puzzleHeight / gridSize,
-      width: outterLength, height: puzzleHeight
+      width: outterLength,
+      height: puzzleHeight
       }}
     >
 
@@ -54,12 +55,10 @@ const Puzzle = ({ outterLength, gameDataHandler, piecesNumber, puzzleHeight, fla
         return (
           <PuzzleItem
             handlePieceSelection={(item, index) => handlePieceSelection(item, index)}
-            outterLength={outterLength}
             piecesNumber={piecesNumber}
-            key={outterLength + i}
             gridSize={gridSize}
             thisImage={src}
-            thisIndex={i}
+            pieceIndex={i}
             piece={piece}
             step={step}
           />

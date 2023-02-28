@@ -51,7 +51,7 @@ export default function Home() {
       })
     }
   })
-  
+
   // filtering data logic
   const setFilteredFlags = (filteredData, isTextEntered) => {
     if(!isTextEntered) return setData({...data, filteredData:null, isTextEntered:false})
@@ -87,3 +87,4 @@ export default function Home() {
   )
   
 }
+

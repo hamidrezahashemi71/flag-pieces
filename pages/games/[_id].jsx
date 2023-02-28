@@ -12,28 +12,28 @@ import Head from 'next/head'
 const Game = () => {
 
   const [thisGame, setThisGame] = useState(null)
-  const router = useRouter()
+  const { push, query } = useRouter()
   const database = useDatabase()
   const thisIndex = database.findIndex(item => item.token === useToken())
 
   // setting thisGame from created object in database
   useEffect(() => {
-    database[thisIndex]['games'][router.query._id]['isPasswordCorrect'] = true
-    if (!useToken()) router.push('/')
-    if (router.query._id) {
-      if (!findItem() | !findItem()['games'][router.query._id]) router.push('/404')
+    database[thisIndex]['games'][query._id]['isPasswordCorrect'] = true
+    if (!useToken()) push('/')
+    if (query._id) {
+      if (!findItem() | !findItem()['games'][query._id]) push('/404')
         
-      else if (!database[thisIndex]['games'][router.query._id]['isPasswordCorrect']) router.push({
+      else if (!database[thisIndex]['games'][query._id]['isPasswordCorrect']) push({
         pathname: '/login/[_id]',
-        query: {_id: router.query._id}
+        query: {_id: query._id}
       })
         
       else setThisGame({
-        _id: router.query._id,
-        image: findItem()['games'][router.query._id]['flag'],
-        pieces: [...findItem()['games'][router.query._id]['pieces']],
-        playingNumber: findItem()['games'][router.query._id]['playingNumber'],
-        name: findItem()['games'][router.query._id]['name']
+        _id: query._id,
+        image: findItem()['games'][query._id]['flag'],
+        pieces: [...findItem()['games'][query._id]['pieces']],
+        playingNumber: findItem()['games'][query._id]['playingNumber'],
+        name: findItem()['games'][query._id]['name']
       })
     }
   }, [])
@@ -47,7 +47,7 @@ const Game = () => {
       isPasswordCorrect: false
     }
     setDatabase(database)
-    router.push({
+    push({
       pathname: '/landing/[_id]',
       query: {_id: thisGame._id}
     })

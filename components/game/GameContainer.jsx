@@ -12,19 +12,19 @@ import Image from "next/image"
 
 const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thisGame }) => {
   
+  const [createGameData, setCreateGameData] = useState({
+    name: '',
+    password: '',
+    pieces: [],
+  })
+  
   const [pieceNumbers, setPieceNumbers] = useState({
     isSelected: true,
     piecesNumber: 4,
     gridSize: 2
   })
 
-  const [gameData, setGameData] = useState({
-    name: '',
-    password: '',
-    pieces: [],
-  })
-
-  const router = useRouter()
+  const { push } = useRouter()
 
   // create game button functionality for home page
   const handleCreateGame = () => {
@@ -33,9 +33,9 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
     const thisIndex = database.findIndex(item => item.token === useToken())
     const gameId = `${new Date().getTime()}${String(Math.random()).slice(3, 9)}`
 
-    if (!gameData) return toast.error("Please Enter Information!")
-    if (!gameData.name) return toast.error("Please Enter Your Game Name!")
-    if (!gameData.password) return toast.error("Please Enter Your Game Password!")
+    if (!createGameData) return toast.error("Please Enter Information!")
+    if (!createGameData.name) return toast.error("Please Enter Your Game Name!")
+    if (!createGameData.password) return toast.error("Please Enter Your Game Password!")
     if (!useToken()) return toast.error("Connection Error! Refresh the page and try again!")
     if (!thisItem)
       return toast.error("Connection Error! Refresh the page and try again!")
@@ -43,9 +43,9 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
       return toast.error("You cannot create more than 3 games!")
 
     thisItem['games'][gameId] = {
-    name: gameData.name,
-    password: gameData.password,
-    pieces: gameData.pieces,
+    name: createGameData.name,
+    password: createGameData.password,
+    pieces: createGameData.pieces,
     playingNumber: 0,
     flag: {
       src,
@@ -58,14 +58,14 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
     database[thisIndex] = thisItem
     setDatabase(database)
     toast.success("Game created successfully!")
-    router.push({
+    push({
       pathname: '/landing/[_id]',
       query: {_id: gameId}
     })
   }
 
   // go to login button functionality for landing page
-  const handleNextStep = () => router.push({ pathname: '/login/[_id]', query: { _id: thisGame._id } })
+  const handleNextStep = () => push({ pathname: '/login/[_id]', query: { _id: thisGame._id } })
   
   return (
     <Container disableGutters maxWidth={'lg'} sx={{
@@ -128,13 +128,13 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
           }}>
   
             <ImageHolder
-              gameDataHandler={(data) => setGameData(data)}
+              gameDataHandler={(data) => setCreateGameData(data)}
               piecesNumber={pieceNumbers.piecesNumber}
               gridSize={pieceNumbers.gridSize} 
               naturalHeight={naturalHeight}
               naturalWidth={naturalWidth}
               flagMode='unusable'
-              gameData={gameData}
+              gameData={createGameData}
               useFor={useFor}
               src={src}
               step={1}
@@ -152,9 +152,9 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
                 {useFor === 'game' ?
               <CreateGameInfo
                 piecesNumberHandler={(data) => setPieceNumbers(data)}
-                gameDataHandler={(data) => setGameData(data)}
+                gameDataHandler={(data) => setCreateGameData(data)}
                 selectedButton={pieceNumbers}
-                gameData={gameData}
+                gameData={createGameData}
                 flagName={flagName}
               />
               :

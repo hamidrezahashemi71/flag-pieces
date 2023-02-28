@@ -4,30 +4,37 @@ import Loading from "../../components/main/Loading"
 import { useEffect, useState } from "react"
 import { Container } from "@mui/system"
 import { useRouter } from "next/router"
+import { toast } from "react-toastify"
 import Head from 'next/head'
 
 
 
 const Landing = () => {
 
-  const [gameData, setGameData] = useState(null)
-  const router = useRouter()
+  const [landingGameData, setLandingGameData] = useState(null)
+  const { push, query } = useRouter()
 
   // set gameData from selected flag in home page
   useEffect(() => {
-    if(!useToken()) router.push('/')
-    if (router.query._id) {
-      if (!findItem() || !findItem()['games'][router.query._id]) router.push('/404')
-      else setGameData({
-        _id: router.query._id,
-        name: findItem()['games'][router.query._id]['name'],
-        image: findItem()['games'][router.query._id]['flag'],
-        playingNumber: findItem()['games'][router.query._id]['playingNumber'],
+    if (!useToken()) {
+      toast.error("Something went wrong! Create a new game")
+      push('/')
+    }
+    if (query._id) {
+      if (!findItem() || !findItem()['games'][query._id]) {
+        toast.error("This game doesn't exist")
+        push('/404')
+      }
+      else setLandingGameData({
+        _id: query._id,
+        name: findItem()['games'][query._id]['name'],
+        image: findItem()['games'][query._id]['flag'],
+        playingNumber: findItem()['games'][query._id]['playingNumber'],
       })
     }
-  }, [router.query._id])
+  }, [query._id])
 
-  if(!gameData) return <Loading />
+  if(!landingGameData) return <Loading />
   return (
     <Container maxWidth='lg' sx={{
       display: 'flex',
@@ -42,10 +49,10 @@ const Landing = () => {
         <meta name="description" content="Landing page" />
       </Head>
       <GameContainer
-        naturalHeight={gameData.image.naturalHeight}
-        naturalWidth={gameData.image.naturalWidth}
-        src={gameData.image.src}
-        thisGame={gameData}
+        naturalHeight={landingGameData.image.naturalHeight}
+        naturalWidth={landingGameData.image.naturalWidth}
+        src={landingGameData.image.src}
+        thisGame={landingGameData}
         useFor='landing'
       />
 

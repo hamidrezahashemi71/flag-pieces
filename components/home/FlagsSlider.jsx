@@ -7,6 +7,7 @@ import { useState } from "react"
 
 
 const FlagSlider = ({ finalFlags, pages, handleChooseFlag }) => {
+  
   const [currentPage, setCurrentPage] = useState(Number(pages[0]))
 
   return ( 

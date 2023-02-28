@@ -12,22 +12,26 @@ import Head from 'next/head'
 
 const Login = () => {
 
-  const router = useRouter()
   const [loginData, setLoginData] = useState({
     _id: null,
     password: '',
     loading: true
   })
+
+  const { push, query } = useRouter()
   const thisItem = findItem()
-  const gameId = router.query._id
+  const gameId = query._id
 
   // setting loginData from created object in database
   useEffect(() => {
     if (gameId) {
-      if (!thisItem || !thisItem['games'][gameId]) router.push('/404')
+      if (!thisItem || !thisItem['games'][gameId]) {
+        toast.error("This game doesn't exist")
+        push('/404')
+      }
       else setLoginData({ ...loginData, thisItem, _id: gameId, loading:false })
     }
-  }, [router.query._id])
+  }, [query._id])
 
   // login functionality for comparing passwords
   const loginHandler = () => {
@@ -35,7 +39,7 @@ const Login = () => {
       return toast.error("Incorrect Password")
     else {
       toast.success("Let's Play!")
-      router.push({
+      push({
         pathname: '/games/[_id]',
         query: {_id: loginData._id}
       })
