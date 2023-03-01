@@ -33,7 +33,7 @@ const FlagSlider = ({ finalFlags, pages, handleChooseFlag }) => {
           finalFlags && finalFlags[currentPage] ?
           finalFlags[currentPage].map((flag, item, ref) => {
             return (
-              <Grid key={flag.name} item xs={1} sx={ ref.length < 6 ? {height: '50%'} : {} }>
+              <Grid key={flag.flagName} item xs={1} sx={ ref.length < 6 ? {height: '50%'} : {} }>
                 <FlagCard flag={flag} handleChooseFlag={handleChooseFlag} />
               </Grid>
             )

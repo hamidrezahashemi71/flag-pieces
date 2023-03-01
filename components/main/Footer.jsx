@@ -46,7 +46,7 @@ const Footer = () => {
         gap:'6px'
       }}>
 
-        <Image src={'/assets/images/copyright.png'} width={13} height={13} />
+        <Image src={'/assets/images/copyright.png'} alt='copyright' width={13} height={13} />
         <Typography className="copyright">Copyright 2023</Typography>
         
       </Container>

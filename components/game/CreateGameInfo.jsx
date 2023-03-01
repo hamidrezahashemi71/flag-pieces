@@ -8,11 +8,13 @@ const CreateGameInfo = ({ flagName, selectedButton, piecesNumberHandler, gameDat
   const [buttons, setButtons] = useState([
     { ...selectedButton },
     {
+      _id:2,
       piecesNumber: 9,
       isSelected: false,
       gridSize: 3
     },
     {
+      _id:3,
       piecesNumber: 16,
       isSelected: false, 
       gridSize: 4
@@ -48,7 +50,7 @@ const CreateGameInfo = ({ flagName, selectedButton, piecesNumberHandler, gameDat
         {buttons.map((button, buttonIndex) => {
 
           return (
-            <Grid item xs={1} sx={{ p: '4px' }} >
+            <Grid key={button._id} item xs={1} sx={{ p: '4px' }} >
 
               <Button
                 variant={button.isSelected ? 'primaryButton' : 'glassButton'}

@@ -19,6 +19,7 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
   })
   
   const [pieceNumbers, setPieceNumbers] = useState({
+    _id:1,
     isSelected: true,
     piecesNumber: 4,
     gridSize: 2
@@ -95,7 +96,7 @@ const GameContainer = ({ useFor, src, flagName, naturalWidth, naturalHeight, thi
           top: '0',
         }} > 
           
-            <Image src={'/assets/images/rectangle-bg.png'} fill />
+            <Image src={'/assets/images/rectangle-bg.png'} alt="rectangle-bg" fill />
             <Container disableGutters maxWidth={false} sx={{
               transform: "matrix(0.95, 0.31, -0.4, 0.92, 0, 0)",
               background: "#8449E4",
